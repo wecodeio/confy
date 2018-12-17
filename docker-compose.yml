@@ -14,13 +14,12 @@ services:
       - "15432:5432"
   webpacker:
     build: .
-    command: bundle exec bin/webpack-dev-server
+    env_file: .env
+    command: bash -c "rm -f tmp/cache/webpacker/.last-compilation-digest-development && bundle exec bin/webpack-dev-server"
     volumes:
       - .:/confy
     ports:
       - "3035:3035"
-    depends_on:
-      - web
   web:
     build: .
     env_file: .env
@@ -31,3 +30,4 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - webpacker
