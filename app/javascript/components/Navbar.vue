@@ -10,14 +10,14 @@
           <nav class='nav'>
             <ul class='nav-list'>
               <li class='nav-item'>
-                <a href="#" class="pure-button">
+                <router-link :to="{ name: 'Conferences' }" class="pure-button">
                   Conferences
-                </a>
+                </router-link>
               </li>
-              <li class='nav-item'>
-                <a href="#" class="pure-button">
+              <li class="nav-item">
+                <router-link :to="{ name: 'Speakers' }" class="pure-button">
                   Speakers
-                </a>
+                </router-link>
               </li>
               <!-- <li class='nav-item'>
                 <a href="#" class="pure-button">
