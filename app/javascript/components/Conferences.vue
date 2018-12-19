@@ -16,7 +16,9 @@
         </div>
         <header>
           <h2 class="title mini">
-            <a href="/conferences/2014/rubyconfuy">{{ conference.name }}</a>
+            <router-link :to="{ name: 'Conference' }">
+              {{ conference.name }}
+            </router-link>
           </h2>
           <p class="data">X talks</p>
         </header>
@@ -27,7 +29,7 @@
 
 <script>
 export default {
-  name: "Index",
+  name: "Conferences",
   data() {
     return {
       conferences: [
@@ -45,21 +47,5 @@ export default {
 </script>
 
 <style>
-.index {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 30px;
-  margin-top: 60px;
-}
-.index h2 {
-  font-size: 1.8em;
-  text-align: center;
-  margin-top: 0;
-}
-.index .ingredients {
-  margin: 30px auto;
-}
-.index .ingredients li {
-  display: inline-block;
-}
+
 </style>

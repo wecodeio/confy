@@ -9,11 +9,12 @@ services:
     image: postgres:9.5.12-alpine
     env_file: .env
     volumes:
-      - $PWD/db-data:/var/lib/postgresql/data
+      - $PWD/../db-confy:/var/lib/postgresql/data
     ports:
       - "15432:5432"
   webpacker:
     build: .
+    user: confy
     env_file: .env
     command: bash -c "rm -f tmp/cache/webpacker/.last-compilation-digest-development && bundle exec bin/webpack-dev-server"
     volumes:
@@ -23,6 +24,7 @@ services:
   web:
     build: .
     env_file: .env
+    user: confy
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
       - .:/confy
