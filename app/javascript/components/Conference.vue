@@ -102,6 +102,9 @@
 </template>
 
 <script>
+
+//this.$route.params.smoothie_slug
+
 export default {
   name: "Conference",
   data() {
@@ -115,6 +118,9 @@ export default {
         }
       ]
     };
+  },
+  created() {
+    console.log(this.$route.params.conference_year, this.$route.params.conference_slug);
   }
 };
 </script>

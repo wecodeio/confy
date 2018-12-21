@@ -19,7 +19,10 @@
 <ul>
 <% @speakers.each do |speaker| %>
 <li>
-    <%= link_to speaker.full_name, edit_admin_speaker_path(speaker) %>
+    <%= link_to edit_admin_speaker_path(speaker) do %>
+        <%= speaker.name %> (<%= speaker.slug %>)
+    <% end %>
+
     <%= link_to "borrar", admin_speaker_path(speaker), method: :delete %>
 </li>
 <% end %>

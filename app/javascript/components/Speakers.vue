@@ -2,24 +2,20 @@
   <div class="speakers">
     <h1 class="content-subhead">All speakers</h1>
     <section class="pure-g-r">
-      <article class="speaker pure-u-1-4">
+      <article class="speaker pure-u-1-4" v-for="speaker in speakers" :key="speaker.slug">
         <a href="/speakers/tenderlove">
           <div class="avathar small">
             <img
-              alt="Aaron Patterson"
-              onerror="this.src=&quot;http://confy-assets.wecode.io/speakers/generic-speaker.png&quot;"
-              src="http://confy-assets.wecode.io/speakers/tenderlove.jpeg"
-              title="Aaron Patterson"
+              :alt="speaker.name"
+              src="http://confy-assets.wecode.io/speakers/generic-speaker.png"
+              :title="speaker.name"
             >
           </div>
         </a>
         <header>
           <a href="/speakers/tenderlove">
-            <h2 class="name">Aaron Patterson</h2>
+            <h2 class="name">{{ speaker.name }}</h2>
           </a>
-          <div class="twitter">
-            <a href="//twitter.com/tenderlove">@tenderlove</a>
-          </div>
         </header>
       </article>
     </section>
@@ -27,16 +23,22 @@
 </template>
 
 <script>
-export default {
-    name: 'Speakers',
-    data() {
-        return {
+import axios from "axios";
 
-        }
-    }
-}
+export default {
+  name: "Speakers",
+  data() {
+    return {
+      speakers: []
+    };
+  },
+  created() {
+    axios.get("/api/v1/speakers").then(response => {
+      this.speakers = response.data;
+    });
+  }
+};
 </script>
 
 <style>
-
 </style>

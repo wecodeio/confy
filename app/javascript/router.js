@@ -7,26 +7,27 @@ import Speakers from './components/Speakers'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
-        path: '/',
-        name: 'Conferences',
-        component: Conferences
-      },
-      {
-        path: '/conferences',
-        name: 'Conferences',
-        component: Conferences
-      },
-      {
-        path: '/conference',
-        name: 'Conference',
-        component: Conference
-      },
-      {
-        path: '/speakers',
-        name: 'Speakers',
-        component: Speakers
-      }
+      path: '/',
+      name: 'Conferences',
+      component: Conferences
+    },
+    {
+      path: '/conferences',
+      name: 'Conferences',
+      component: Conferences
+    },
+    {
+      path: '/conferences/:conference_year/:conference_slug',
+      name: 'Conference',
+      component: Conference
+    },
+    {
+      path: '/speakers',
+      name: 'Speakers',
+      component: Speakers
+    }
   ]
 })

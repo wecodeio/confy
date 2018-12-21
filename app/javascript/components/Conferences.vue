@@ -3,21 +3,21 @@
     <header>
       <h1 class="content-subhead">2014</h1>
     </header>
-    <section class="conferences-grid pure-g-r" v-for="conference in conferences" v-bind:key="conference.id">
-      <article class="conference pure-u-1-3">
+    <section class="conferences-grid pure-g-r">
+      <article class="conference pure-u-1-3" v-for="(conference, index) in conferences" :key="index">
         <div class="logo normal">
           <a href="/conferences/2014/rubyconfuy">
             <img
-              v-bind:alt="conference.year"
-              v-bind:src="conference.image"
-              v-bind:title="conference.name"
+              :alt="conference.title"
+              src="http://confy-assets.wecode.io/conferences/rubyconfuy-2014.png"
+              :title="conference.title"
             >
           </a>
         </div>
         <header>
           <h2 class="title mini">
-            <router-link :to="{ name: 'Conference' }">
-              {{ conference.name }}
+            <router-link :to="{ name: 'Conference', params: { conference_year: conference.year, conference_slug: conference.slug } }">
+              {{ conference.title }}
             </router-link>
           </h2>
           <p class="data">X talks</p>
@@ -28,20 +28,19 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Conferences",
   data() {
     return {
-      conferences: [
-        {
-          id: 1,
-          name: "RubyConf Uruguay 2014",
-          image: "http://confy-assets.wecode.io/conferences/rubyconfuy-2014.png",
-          slug: "rubyconfuy",
-          year: 2014
-        }
-      ]
-    };
+      conferences: []
+    }
+  },
+  created() {
+    axios.get("/api/v1/conferences").then(response => {
+      this.conferences = response.data;
+    });
   }
 };
 </script>
