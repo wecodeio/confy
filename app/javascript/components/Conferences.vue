@@ -4,15 +4,15 @@
       <h1 class="content-subhead">2014</h1>
     </header>
     <section class="conferences-grid pure-g-r">
-      <article class="conference pure-u-1-3" v-for="(conference, index) in conferences" :key="index">
+      <article class="conference pure-u-1-3" v-for="conference in conferences" :key="conference.slug">
         <div class="logo normal">
-          <a href="/conferences/2014/rubyconfuy">
+          <router-link :to="{ name: 'Conference', params: { slug: conference.slug } }">
             <img
               :alt="conference.title"
               src="http://confy-assets.wecode.io/conferences/rubyconfuy-2014.png"
               :title="conference.title"
             >
-          </a>
+          </router-link>
         </div>
         <header>
           <h2 class="title mini">

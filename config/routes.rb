@@ -7,9 +7,9 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :speakers, only: :index
       resources :conferences, only: [:index, :show], param: :slug
       resources :talks, only: [:show], param: :slug
+      resources :speakers, only: [:index, :show], param: :slug
     end
   end
 

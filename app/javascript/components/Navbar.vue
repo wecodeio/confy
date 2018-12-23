@@ -53,7 +53,9 @@
             <a href='//twitter.com/wecodeio'>wecode.io</a>
           </div>
           <div class='disclaimer'>
-            <a href="#">disclaimer</a>
+            <router-link :to="{ name: 'Disclaimer' }">
+              disclaimer
+            </router-link>
           </div>
         </div>
       </div>

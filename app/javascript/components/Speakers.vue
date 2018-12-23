@@ -3,7 +3,7 @@
     <h1 class="content-subhead">All speakers</h1>
     <section class="pure-g-r">
       <article class="speaker pure-u-1-4" v-for="speaker in speakers" :key="speaker.slug">
-        <a href="/speakers/tenderlove">
+        <router-link :to="{ name: 'Speaker', params: { slug: speaker.slug } }">
           <div class="avathar small">
             <img
               :alt="speaker.name"
@@ -11,11 +11,11 @@
               :title="speaker.name"
             >
           </div>
-        </a>
+        </router-link>
         <header>
-          <a href="/speakers/tenderlove">
+          <router-link :to="{ name: 'Speaker', params: { slug: speaker.slug } }">
             <h2 class="name">{{ speaker.name }}</h2>
-          </a>
+          </router-link>
         </header>
       </article>
     </section>
