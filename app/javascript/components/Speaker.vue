@@ -31,7 +31,7 @@
               <router-link :to="{ name: 'Conference', params: { slug: talk.conference.slug } }">
                 <img
                   :alt="talk.conference.title"
-                  src="http://confy-assets.wecode.io/conferences/rubyconfuy-2014.png"
+                  src="images/conference.png"
                   :title="talk.conference.title"
                 >
               </router-link>

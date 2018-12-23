@@ -4,8 +4,9 @@
       <aside class="logo big pure-u-1-5">
         <img
           :alt="conference.title"
-          src="http://confy-assets.wecode.io/conferences/rubyconfuy-2014.png"
+          src="images/conference.png"
           :title="conference.title"
+          style="width: 100%"
         >
       </aside>
       <div class="conference-description pure-u-4-5">

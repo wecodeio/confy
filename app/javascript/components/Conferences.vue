@@ -1,16 +1,17 @@
 <template>
   <div>
-    <header>
+    <!-- <header>
       <h1 class="content-subhead">2014</h1>
-    </header>
+    </header> -->
     <section class="conferences-grid pure-g-r">
       <article class="conference pure-u-1-3" v-for="conference in conferences" :key="conference.slug">
         <div class="logo normal">
           <router-link :to="{ name: 'Conference', params: { slug: conference.slug } }">
             <img
               :alt="conference.title"
-              src="http://confy-assets.wecode.io/conferences/rubyconfuy-2014.png"
+              src="images/conference.png"              
               :title="conference.title"
+              style="width: 100%"
             >
           </router-link>
         </div>
