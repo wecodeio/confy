@@ -11,10 +11,12 @@ module Api
           slug: talk.slug,
           description: talk.title,
           video_id: talk.video_id,
-          speaker: {
-            slug: talk.speaker.slug,
-            name: talk.speaker.name,
-          },
+          speakers: talk.speakers.map do |speaker|
+            {
+              slug: speaker.slug,
+              name: speaker.name,
+            }
+          end,
           conference: {
             slug: talk.conference.slug,
             title: talk.conference.title,

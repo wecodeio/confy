@@ -19,23 +19,23 @@
       </div>
       <header class="speaker-mini">
         <ul>
-          <li style="display: block;">
+          <li style="display: block;" v-for="speaker in talk.speakers" :key="speaker.slug">
             <div class="avathar small">
-              <router-link :to="{ name: 'Speaker', params: { slug: talk.speaker.slug } }">
+              <router-link :to="{ name: 'Speaker', params: { slug: speaker.slug } }">
                 <img
-                  :alt="talk.speaker.name"
+                  :alt="speaker.name"
                   src="http://confy-assets.wecode.io/speakers/generic-speaker.png"
-                  :title="talk.speaker.name"
+                  :title="speaker.name"
                 >
               </router-link>
             </div>
           </li>
         </ul>
         <div class="info">
-          <p class="name">
+          <p class="name" v-for="speaker in talk.speakers" :key="speaker.slug">
             <router-link
-              :to="{ name: 'Speaker', params: { slug: talk.speaker.slug } }"
-            >{{ talk.speaker.name }}</router-link>
+              :to="{ name: 'Speaker', params: { slug: speaker.slug } }"
+            >{{ speaker.name }}</router-link>
           </p>
           <h1 class="title">{{ talk.title }}</h1>
         </div>

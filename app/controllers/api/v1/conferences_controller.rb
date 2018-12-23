@@ -24,10 +24,12 @@ module Api
               slug: talk.slug,
               description: talk.title,
               video_thumbnail: talk.video_thumbnail,
-              speaker: {
-                slug: talk.speaker.slug,
-                name: talk.speaker.name,
-              },
+              speakers: talk.speakers.map do |speaker|
+                {
+                  slug: speaker.slug,
+                  name: speaker.name,
+                }
+              end,
             }
           end,
         }

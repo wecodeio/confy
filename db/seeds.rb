@@ -40,6 +40,7 @@ smallTools = Talk.create(:title => 'The Power of Small Tools',
   :slug => 'the-power-of-small-tools')
 
 soveran.talks << smallTools
+jano.talks << smallTools
 
 interfaces = Talk.create(:title => '¿Dónde están mis interfaces?',
   :video_url => 'https://vimeo.com/62132088',

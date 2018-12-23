@@ -1,5 +1,5 @@
 class Talk < ApplicationRecord
-  belongs_to :speaker, class_name: "Speaker", foreign_key: "speaker_id"
+  has_and_belongs_to_many :speakers, class_name: "Speaker"
   belongs_to :conference, class_name: "Conference", foreign_key: "conference_id"
 
   def video_id
