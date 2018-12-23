@@ -16,7 +16,7 @@
         </div>
         <header>
           <h2 class="title mini">
-            <router-link :to="{ name: 'Conference', params: { conference_year: conference.year, conference_slug: conference.slug } }">
+            <router-link :to="{ name: 'Conference', params: { slug: conference.slug } }">
               {{ conference.title }}
             </router-link>
           </h2>

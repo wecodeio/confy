@@ -3,11 +3,11 @@ import Router from 'vue-router'
 import Conferences from './components/Conferences'
 import Conference from './components/Conference'
 import Speakers from './components/Speakers'
+import Talk from './components/Talk'
 
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   routes: [
     {
       path: '/',
@@ -20,7 +20,7 @@ export default new Router({
       component: Conferences
     },
     {
-      path: '/conferences/:conference_year/:conference_slug',
+      path: '/conferences/:slug',
       name: 'Conference',
       component: Conference
     },
@@ -28,6 +28,11 @@ export default new Router({
       path: '/speakers',
       name: 'Speakers',
       component: Speakers
+    },
+    {
+      path: '/talks/:slug',
+      name: 'Talk',
+      component: Talk
     }
   ]
 })

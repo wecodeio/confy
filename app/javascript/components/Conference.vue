@@ -4,15 +4,15 @@
       <section class="conference pure-u-1">
         <aside class="logo big pure-u-1-5">
           <img
-            alt="RubyConf Uruguay 2014"
+            :alt="conference.title"
             src="http://confy-assets.wecode.io/conferences/rubyconfuy-2014.png"
-            title="RubyConf Uruguay 2014"
+            :title="conference.title"
           >
         </aside>
         <div class="conference-description pure-u-4-5">
           <header>
-            <h2 class="title">RubyConf Uruguay 2014</h2>
-            <p class="conference-meta">
+            <h2 class="title">{{ conference.title }}</h2>
+            <!-- <p class="conference-meta">
               <span class="tag">ruby</span>
               <span class="tag">rails</span>
               <span class="tag">sinatra</span>
@@ -20,77 +20,69 @@
               <span class="tag">scrum</span>
               <span class="tag">javascript</span>
               <span class="tag">nosql</span>
-            </p>
+            </p> -->
           </header>
-          <p>RubyConf Uruguay is a single-track conference aimed at developers who want to learn about or get up-to-date on topics such as Ruby, Ruby on Rails, Sinatra, Testing, SCRUM, JavaScript, SQL vs NoSQL, and more.</p>
+          <p>{{ conference.description }}</p>
           <div class="data">
             <span class="when">
               <i class="icon-calendar"></i>
-              23-24 Mar 2014
+              {{ conference.dates }}
               |
             </span>
             <span class="where">
               <i class="icon-map-marker"></i>
-              <a
-                href="http://goo.gl/maps/ujINm"
-                target="blank"
-                title="Torre de las Telecomunicaciones"
-              >Torre de las Telecomunicaciones</a>
-              |
-            </span>
-            <span class="who">
-              <i class="icon-twitter"></i>
-              <a
-                href="http://twitter.com/rubyconfuruguay"
-                target="blank"
-                title="rubyconfuruguay"
-              >rubyconfuruguay</a>
+              {{ conference.place }}
               |
             </span>
             <span class="info">
               <i class="icon-external-link"></i>
               <a
-                href="http://http://www.rubyconfuruguay.org/en"
+                :href="conference.url"
                 target="blank"
-                title="RubyConf Uruguay 2014"
-              >http://www.rubyconfuruguay.org/en</a>
+                :title="conference.title"
+              >{{ conference.url }}</a>
             </span>
           </div>
         </div>
       </section>
       <section class="talks-grid">
-        <article class="talk">
+        <article class="talk" v-for="talk in conference.talks" :key="talk.id">
           <div class="video">
-            <a href="/talks/2014/rubyconfuy/se-responsable">
+            <router-link :to="{ name: 'Talk', params: { slug: talk.slug } }">
               <img
-                alt="Sé responsable"
-                src="//img.youtube.com/vi/ppuNhkN1wUg/maxresdefault.jpg"
-                title="Sé responsable"
+                :alt="talk.title"
+                :src="talk.video_thumbnail"
+                :title="talk.title"
               >
-            </a>
+            </router-link>
           </div>
           <aside class="meta">
             <header class="speaker-mini" id="carousel-1">
               <ul>
                 <li style="display: block;">
                   <div class="avathar small">
-                    <a href="/speakers/godfoca">
-                      <img
-                        alt="Nicolás Sanguinetti"
-                        onerror="this.src=&quot;http://confy-assets.wecode.io/speakers/generic-speaker.png&quot;"
-                        src="http://confy-assets.wecode.io/speakers/godfoca.jpeg"
-                        title="Nicolás Sanguinetti"
-                      >
+                    <a href="/speakers/xxx">
+                      <router-link :to="{ name: 'Speaker', params: { slug: talk.speaker.slug } }">
+                        <img
+                          :alt="talk.speaker.name"
+                          src="http://confy-assets.wecode.io/speakers/generic-speaker.png"
+                          :title="talk.speaker.name"
+                        >
+                      </router-link>
                     </a>
                   </div>
                 </li>
               </ul>
               <div class="info">
                 <p class="name">
-                  <a href="/speakers/godfoca">Nicolás Sanguinetti</a>
+                  <router-link :to="{ name: 'Speaker', params: { slug: talk.speaker.slug } }">
+                    {{ talk.speaker.name }}
+                  </router-link>
                 </p>
                 <h1 class="title">
-                  <a href="/talks/2014/rubyconfuy/se-responsable">Sé responsable</a>
+                  <router-link :to="{ name: 'Talk', params: { slug: talk.slug } }">
+                    {{ talk.title }}              
+                  </router-link>
                 </h1>
               </div>
             </header>
@@ -103,26 +95,23 @@
 
 <script>
 
-//this.$route.params.smoothie_slug
+import axios from "axios";
 
 export default {
   name: "Conference",
   data() {
     return {
-      conference: {
-        name: 'RubyConf Uruguay 2014'
-      },
-      talks: [
-        {
-
-        }
-      ]
-    };
+      conference: null
+    }
   },
   created() {
-    console.log(this.$route.params.conference_year, this.$route.params.conference_slug);
+    var slug = this.$route.params.slug;
+    axios.get("/api/v1/conferences/" + slug).then(response => {
+      this.conference = response.data;
+    });
   }
 };
+
 </script>
 
 <style>

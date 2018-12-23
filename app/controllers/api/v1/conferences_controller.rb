@@ -5,12 +5,33 @@ module Api
       respond_to :json
 
       def index
-        conferences = [
-          { title: 'RubyConf Argentina 2013', year: 2013, slug: 'rubyconfar' },
-          { title: 'RubyConf Argentina 2014', year: 2014, slug: 'rubyconfar' },
-          { title: 'RubyConf Uruguay 2013', year: 2013, slug: 'rubyconfuy' }
-        ]
-        respond_with conferences.to_json
+        conferences = Conference.all
+        respond_with conferences.to_json(only: [:title, :year, :slug])
+      end
+
+      def show
+        conference = Conference.find_by(slug: params[:slug])
+        x = {
+          title: conference.title,
+          slug: conference.slug,
+          description: conference.description,
+          dates: '12-14 Mar 2014',
+          place: conference.place,
+          url: conference.url,
+          talks: conference.talks.map do |talk|
+            {
+              title: talk.title,
+              slug: talk.slug,
+              description: talk.title,
+              video_thumbnail: talk.video_thumbnail,
+              speaker: {
+                slug: talk.speaker.slug,
+                name: talk.speaker.name
+              }
+            }
+          end
+        }
+        respond_with x.to_json
       end
 
     end
