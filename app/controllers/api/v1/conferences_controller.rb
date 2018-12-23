@@ -15,7 +15,7 @@ module Api
           title: conference.title,
           slug: conference.slug,
           description: conference.description,
-          dates: '12-14 Mar 2014',
+          dates: "12-14 Mar 2014",
           place: conference.place,
           url: conference.url,
           talks: conference.talks.map do |talk|
@@ -26,14 +26,13 @@ module Api
               video_thumbnail: talk.video_thumbnail,
               speaker: {
                 slug: talk.speaker.slug,
-                name: talk.speaker.name
-              }
+                name: talk.speaker.name,
+              },
             }
-          end
+          end,
         }
         respond_with x.to_json
       end
-
     end
   end
 end

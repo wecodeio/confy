@@ -22,14 +22,13 @@ module Api
               video_thumbnail: talk.video_thumbnail,
               conference: {
                 title: talk.conference.title,
-                slug: talk.conference.slug
-              }
+                slug: talk.conference.slug,
+              },
             }
-          end
+          end,
         }
         respond_with x.to_json
       end
-
     end
   end
 end

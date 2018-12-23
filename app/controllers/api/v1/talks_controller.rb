@@ -13,16 +13,15 @@ module Api
           video_id: talk.video_id,
           speaker: {
             slug: talk.speaker.slug,
-            name: talk.speaker.name
+            name: talk.speaker.name,
           },
           conference: {
             slug: talk.conference.slug,
-            title: talk.conference.title
-          }
+            title: talk.conference.title,
+          },
         }
         respond_with x.to_json
       end
-
     end
   end
 end
