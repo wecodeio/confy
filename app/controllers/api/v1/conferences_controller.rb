@@ -6,7 +6,7 @@ module Api
 
       def index
         conferences = Conference.all
-        respond_with conferences.to_json(only: [:title, :year, :slug])
+        respond_with conferences.group_by { |c| c.start_date.year }.sort.reverse.map { |x| { year: x[0], conferences: x[1] } }.to_json
       end
 
       def show
