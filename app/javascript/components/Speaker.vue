@@ -1,5 +1,6 @@
 <template>
   <div>
+    <vue-headful :title="speaker.name"/>
     <div class="speaker-hero">
       <div class="avathar small">
         <img

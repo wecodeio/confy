@@ -1,5 +1,6 @@
 <template>
   <div class="speakers">
+    <vue-headful title="Speakers"/>
     <h1 class="content-subhead">All speakers</h1>
     <section class="pure-g-r">
       <article class="speaker pure-u-1-4" v-for="speaker in speakers" :key="speaker.slug">

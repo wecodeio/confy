@@ -1,5 +1,6 @@
 <template>
   <div>
+    <vue-headful title="Conferences"/>
     <div v-for="conferencesForYear in conferencesByYear" :key="conferencesForYear.year">
       <header>
         <h1 class="content-subhead">{{ conferencesForYear.year }}</h1>

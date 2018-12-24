@@ -1,5 +1,6 @@
 <template>
   <div>
+    <vue-headful :title="conference.title"/>
     <section class="conference pure-u-1">
       <aside class="logo big pure-u-1-5">
         <img

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <vue-headful :title="talk.title"/>
     <div class="talk jumbo">
       <div class="goto-conference">
         <router-link

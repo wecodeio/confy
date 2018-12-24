@@ -1,5 +1,6 @@
 <template>
   <div>
+    <vue-headful title="Disclaimer"/>
     <h1 class="content-subhead">Disclaimer</h1>
     <div class="disclaimer">
       <p>
