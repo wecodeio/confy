@@ -31,3 +31,12 @@ staging_deploy:
 	heroku ps:scale web=1 --app confy-staging
 	heroku restart --app confy-staging
 	heroku maintenance:off --app confy-staging
+
+production_deploy:
+	heroku maintenance:on --app confy-wecodeio
+	git push production master
+	heroku pg:killall --app confy-wecodeio
+	heroku run rake db:migrate --app confy-wecodeio
+	heroku ps:scale web=1 --app confy-wecodeio
+	heroku restart --app confy-wecodeio
+	heroku maintenance:off --app confy-wecodeio

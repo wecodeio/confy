@@ -11,7 +11,8 @@ Vue.use(Vue2Filters);
 
 import VueAnalytics from 'vue-analytics';
 Vue.use(VueAnalytics, {
-  id: 'UA-131375892-1'
+  id: 'UA-131375892-1',
+  router
 })
 
 import App from '../components/App.vue'
