@@ -16,6 +16,4 @@ document.addEventListener('DOMContentLoaded', () => {
     router,
     render: h => h(App)
   })
-
-  console.log(app)
 });
