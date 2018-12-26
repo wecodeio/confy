@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 import vueHeadful from 'vue-headful';
 Vue.component('vue-headful', vueHeadful);
+import Vue2Filters from 'vue2-filters';
+Vue.use(Vue2Filters);
 
 import App from '../components/App.vue'
 import router from '../router'

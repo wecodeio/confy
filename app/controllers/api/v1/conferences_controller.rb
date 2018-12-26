@@ -6,34 +6,51 @@ module Api
 
       def index
         conferences = Conference.all
-        respond_with conferences.group_by { |c| c.start_date.year }.sort.reverse.map { |x| { year: x[0], conferences: x[1] } }.to_json
+        respond_with conferences.group_by { |conference|
+          conference.start_date.year
+        }.sort.reverse.map { |year_conference|
+          {
+            year: year_conference[0],
+            conferences: year_conference[1].map { |conference|
+              {
+                title: conference.title,
+                slug: conference.slug,
+                description: conference.description,
+                dates: "#{conference.start_date.day}-#{conference.end_date.strftime('%-d %b \'%y')}",
+                place: conference.place,
+                url: conference.url,
+                talks: conference.talks.count
+              }
+            }
+          }
+        }.to_json
       end
 
       def show
         conference = Conference.find_by(slug: params[:slug])
-        x = {
+        conference_presenter = {
           title: conference.title,
           slug: conference.slug,
           description: conference.description,
-          dates: "12-14 Mar 2014",
+          dates: "#{conference.start_date.day}-#{conference.end_date.strftime('%-d %b \'%y')}",
           place: conference.place,
           url: conference.url,
-          talks: conference.talks.map do |talk|
+          talks: conference.talks.map { |talk|
             {
               title: talk.title,
               slug: talk.slug,
               description: talk.title,
               video_thumbnail: talk.video_thumbnail,
-              speakers: talk.speakers.map do |speaker|
+              speakers: talk.speakers.map { |speaker|
                 {
                   slug: speaker.slug,
                   name: speaker.name,
                 }
-              end,
+              },
             }
-          end,
+          },
         }
-        respond_with x.to_json
+        respond_with conference_presenter.to_json
       end
     end
   end

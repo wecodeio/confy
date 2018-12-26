@@ -23,7 +23,7 @@
                 {{ conference.title }}
               </router-link>
             </h2>
-            <p class="data">X talks</p>
+            <p class="data">{{ conference.talks }} {{ conference.talks | pluralize("talk") }}</p>
           </header>
         </article>
       </section>
