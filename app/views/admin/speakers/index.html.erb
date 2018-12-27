@@ -20,6 +20,9 @@
 <% @speakers.each do |speaker| %>
 <li>
     <%= link_to edit_admin_speaker_path(speaker) do %>
+        <% if speaker.avatar.attachment %>
+            <%= image_tag speaker.avatar.attachment %>
+        <% end %>
         <%= speaker.name %> (<%= speaker.slug %>)
     <% end %>
 
