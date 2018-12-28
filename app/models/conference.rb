@@ -6,8 +6,7 @@ class Conference < ApplicationRecord
   validates :slug, uniqueness: true
 
   private
-  def assign_slug
-    self.slug = "#{start_date.year}-#{title.downcase.gsub(' ', '-')}"
-  end
-
+    def assign_slug
+      self.slug = "#{start_date.year}-#{title.downcase.gsub(' ', '-')}"
+    end
 end
