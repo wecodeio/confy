@@ -1,9 +1,11 @@
-<%= form_for [:admin, @speaker] do |f| %>
+<%= simple_form_for [:admin, @speaker] do |f| %>
 
-<%= f.text_field :name %>
-<%= f.text_field :slug %>
-<%= f.file_field :avatar %>
+    <%= render :partial => 'shared/errors', locals: { f: f } %>
 
-<%= f.submit %>
+    <%= f.input :name %>
+    <%= f.input :slug %>
+    <%= f.input :avatar %>
+
+    <%= f.button :submit %>
 
 <% end %>

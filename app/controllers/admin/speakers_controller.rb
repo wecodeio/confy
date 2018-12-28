@@ -19,9 +19,12 @@ class Admin::SpeakersController < AdminController
   end
 
   def update
-    speaker = Speaker.find(params[:id])
-    speaker.update(speaker_params)
-    redirect_to admin_speakers_path
+    @speaker = Speaker.find(params[:id])
+    if @speaker.update(speaker_params)
+      redirect_to admin_speakers_path
+    else
+      render "form"
+    end
   end
 
   def destroy

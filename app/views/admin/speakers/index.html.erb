@@ -28,8 +28,12 @@
                     <%= speaker.slug %>
                 </td>
                 <td>
-                    <%= link_to "editar", edit_admin_speaker_path(speaker) %>
-                    <%= link_to "borrar", admin_speaker_path(speaker), method: :delete %>
+                    <%= link_to edit_admin_speaker_path(speaker) , class: 'btn btn-primary btn-sm' do %>
+                        <i class="fa fa-pencil-alt"></i>
+                    <% end %>
+                    <%= link_to admin_speaker_path(speaker), method: :delete, class: 'btn btn-danger btn-sm' do %>
+                        <i class="fa fa-trash"></i>
+                    <% end %>
                 </td>
             </tr>
         <% end %>
