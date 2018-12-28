@@ -8,7 +8,7 @@
           <div class="avathar small">
             <img
               :alt="speaker.name"
-              src="http://confy-assets.wecode.io/speakers/generic-speaker.png"
+              :src="speaker.avatar_url"
               :title="speaker.name"
             >
           </div>

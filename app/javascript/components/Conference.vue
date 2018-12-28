@@ -6,7 +6,7 @@
         <aside class="logo big pure-u-1-5">
           <img
             :alt="conference.title"
-            src="images/conference.png"
+            :src="conference.image_url"
             :title="conference.title"
             style="width: 100%"
           >
@@ -62,7 +62,7 @@
                     <router-link :to="{ name: 'Speaker', params: { slug: speaker.slug } }">
                       <img
                         :alt="speaker.name"
-                        src="http://confy-assets.wecode.io/speakers/generic-speaker.png"
+                        :src="speaker.avatar_url"
                         :title="speaker.name"
                       >
                     </router-link>

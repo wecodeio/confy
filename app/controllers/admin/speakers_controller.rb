@@ -32,7 +32,6 @@ class Admin::SpeakersController < AdminController
   end
 
   private
-
     def speaker_params
       params[:speaker].permit(:name, :slug, :avatar)
     end

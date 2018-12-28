@@ -6,7 +6,7 @@
         <div class="avathar small">
           <img
             :alt="speaker.name"
-            src="http://confy-assets.wecode.io/speakers/generic-speaker.png"
+            :src="speaker.avatar_url"
             :title="speaker.name"
           >
         </div>
@@ -29,7 +29,7 @@
                 <router-link :to="{ name: 'Conference', params: { slug: talk.conference.slug } }">
                   <img
                     :alt="talk.conference.title"
-                    src="images/conference.png"
+                    :src="talk.conference.image_url"
                     :title="talk.conference.title"
                   >
                 </router-link>

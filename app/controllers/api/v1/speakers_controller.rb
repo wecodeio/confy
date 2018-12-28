@@ -5,8 +5,14 @@ module Api
       respond_to :json
 
       def index
-        speakers = Speaker.all
-        respond_with speakers.to_json(only: [:slug, :name])
+        speakers = Speaker.all.map { |speaker|
+          {
+            slug: speaker.slug,
+            name: speaker.name,
+            avatar_url: speaker.avatar.attachment ? url_for(speaker.avatar.attachment) : '//confy-assets.wecode.io/speakers/generic-speaker.png'
+          }
+        }
+        respond_with speakers.to_json
       end
 
       def show
@@ -14,6 +20,7 @@ module Api
         x = {
           slug: speaker.slug,
           name: speaker.name,
+          avatar_url: speaker.avatar.attachment ? url_for(speaker.avatar.attachment) : '//confy-assets.wecode.io/speakers/generic-speaker.png',
           talks: speaker.talks.map do |talk|
             {
               title: talk.title,
@@ -23,6 +30,7 @@ module Api
               conference: {
                 title: talk.conference.title,
                 slug: talk.conference.slug,
+                image_url: talk.conference.image.attachment ? url_for(talk.conference.image.attachment) : 'images/conference.png'
               },
             }
           end,

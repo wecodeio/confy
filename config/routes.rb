@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :speakers
+    resources :conferences
   end
 
   namespace :api, defaults: {format: :json} do

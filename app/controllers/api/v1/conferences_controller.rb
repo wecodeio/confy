@@ -19,7 +19,8 @@ module Api
                 dates: "#{conference.start_date.day}-#{conference.end_date.strftime('%-d %b \'%y')}",
                 place: conference.place,
                 url: conference.url,
-                talks: conference.talks.count
+                talks: conference.talks.count,
+                image_url: conference.image.attachment ? url_for(conference.image.attachment) : 'images/conference.png'
               }
             }
           }
@@ -35,6 +36,7 @@ module Api
           dates: "#{conference.start_date.day}-#{conference.end_date.strftime('%-d %b \'%y')}",
           place: conference.place,
           url: conference.url,
+          image_url: conference.image.attachment ? url_for(conference.image.attachment) : 'images/conference.png',
           talks: conference.talks.map { |talk|
             {
               title: talk.title,
@@ -45,6 +47,7 @@ module Api
                 {
                   slug: speaker.slug,
                   name: speaker.name,
+                  avatar_url: speaker.avatar.attachment ? url_for(speaker.avatar.attachment) : '//confy-assets.wecode.io/speakers/generic-speaker.png',
                 }
               },
             }

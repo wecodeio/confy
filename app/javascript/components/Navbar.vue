@@ -3,7 +3,9 @@
         <header class='header'>
           <hgroup>
             <h1 class='brand-title'>
-              confy
+              <router-link :to="{ name: 'Conferences' }">
+                confy
+              </router-link>
             </h1>
             <h2 class='brand-tagline'>the conferences' talks directory</h2>
           </hgroup>

@@ -11,7 +11,7 @@
             <router-link :to="{ name: 'Conference', params: { slug: conference.slug } }">
               <img
                 :alt="conference.title"
-                src="images/conference.png"              
+                :src="conference.image_url"
                 :title="conference.title"
                 style="width: 100%"
               >

@@ -1,0 +1,37 @@
+<legend>
+    Speakers
+</legend>
+
+<%= link_to "New conference", new_admin_conference_path %>
+
+<table class="table table-stripped table-hover">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Slug</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @conferences.each do |conference| %>
+            <tr>
+                <td>
+                    <% if conference.image.attachment %>
+                    <%= image_tag conference.image.attachment, style: 'width: 200px;' %>
+                    <% end %>
+                </td>
+                <td>
+                    <%= conference.title %>
+                </td>
+                <td>
+                    <%= conference.slug %>
+                </td>
+                <td>
+                    <%= link_to "editar", edit_admin_conference_path(conference) %>
+                    <%= link_to "borrar", admin_conference_path(conference), method: :delete %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
