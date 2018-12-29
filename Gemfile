@@ -40,3 +40,4 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "responders"
 gem "activestorage-validator"
 gem "simple_form"
+gem 'aws-sdk'
