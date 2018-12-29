@@ -48,3 +48,5 @@ interfaces = Talk.create(:title => '¿Dónde están mis interfaces?',
   :slug => 'donde-estan-mis-interfaces')
 
 jano.talks << interfaces
+
+User.create(email: 'amy@admin.com', password: 'please', password_confirm: 'please')

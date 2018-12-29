@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   root "home#index"
 
   namespace :admin do
+    resources :sessions, only: [:create]
+    get 'login', to: 'sessions#new', as: 'login'
+    get 'logout', to: 'sessions#destroy', as: 'logout'
     resources :speakers
     resources :conferences
   end
