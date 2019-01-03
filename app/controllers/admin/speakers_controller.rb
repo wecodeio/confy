@@ -9,8 +9,12 @@ class Admin::SpeakersController < AdminController
   end
 
   def create
-    Speaker.create(speaker_params)
-    redirect_to admin_speakers_path
+    @speaker = Speaker.new(speaker_params)
+    if @speaker.save
+      redirect_to admin_speakers_path
+    else
+      render "form"
+    end
   end
 
   def edit
@@ -35,6 +39,7 @@ class Admin::SpeakersController < AdminController
   end
 
   private
+
     def speaker_params
       params[:speaker].permit(:name, :slug, :avatar)
     end

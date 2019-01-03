@@ -23,9 +23,12 @@ class Admin::ConferencesController < AdminController
   end
 
   def update
-    conference = Conference.find(params[:id])
-    conference.update(conference_params)
-    redirect_to admin_conferences_path
+    @conference = Conference.find(params[:id])
+    if @conference.update(conference_params)
+      redirect_to admin_conferences_path
+    else
+      render "form"
+    end
   end
 
   def destroy
@@ -36,6 +39,7 @@ class Admin::ConferencesController < AdminController
   end
 
   private
+
     def conference_params
       params[:conference].permit(:title, :description, :start_date, :end_date, :place, :url, :image)
     end

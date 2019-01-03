@@ -1,24 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Configuration
 
-Things you may want to cover:
+#### Install docker:
+> \# apt install docker
+>
+> \# apt install docker-compose
 
-* Ruby version
+#### Execute
+> $ docker-compose build
 
-* System dependencies
+> $ docker-compose run web yarn install
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+> $ docker-compose run web rake db:create
+>
+> $ docker-compose run web rake db:migrate
+>
+> $ docker-compose run web rake db:seed

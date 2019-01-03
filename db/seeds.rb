@@ -49,4 +49,4 @@ interfaces = Talk.create(:title => '¿Dónde están mis interfaces?',
 
 jano.talks << interfaces
 
-User.create(email: 'amy@admin.com', password: 'please', password_confirm: 'please')
+User.create(email: 'amy@admin.com', password: 'please', password_confirmation: 'please')

@@ -6,36 +6,38 @@
 
 <table class="table table-stripped table-hover">
     <thead>
-        <tr>
-            <th>Avatar</th>
-            <th>Full name</th>
-            <th>Slug</th>
-            <th>&nbsp;</th>
-        </tr>
+    <tr>
+        <th>Avatar</th>
+        <th>Full name</th>
+        <th>Slug</th>
+        <th>&nbsp;</th>
+    </tr>
     </thead>
     <tbody>
-        <% @speakers.each do |speaker| %>
-            <tr>
-                <td>
-                    <% if speaker.avatar.attachment %>
-                    <%= image_tag speaker.avatar.attachment, style: 'width: 200px;' %>
+    <% @speakers.each do |speaker| %>
+        <tr>
+            <td>
+                <% if speaker.avatar.attachment %>
+                    <%= link_to speaker.avatar.attachment, :target => "avatar" do %>
+                        <%= image_tag speaker.avatar.attachment, style: 'width: 100px;' %>
                     <% end %>
-                </td>
-                <td>
-                    <%= speaker.name %>
-                </td>
-                <td>
-                    <%= speaker.slug %>
-                </td>
-                <td>
-                    <%= link_to edit_admin_speaker_path(speaker) , class: 'btn btn-primary btn-sm' do %>
-                        <i class="fa fa-pencil-alt"></i>
-                    <% end %>
-                    <%= link_to admin_speaker_path(speaker), method: :delete, class: 'btn btn-danger btn-sm' do %>
-                        <i class="fa fa-trash"></i>
-                    <% end %>
-                </td>
-            </tr>
-        <% end %>
+                <% end %>
+            </td>
+            <td>
+                <%= speaker.name %>
+            </td>
+            <td>
+                <%= speaker.slug %>
+            </td>
+            <td>
+                <%= link_to edit_admin_speaker_path(speaker), class: 'btn btn-primary btn-sm' do %>
+                    <i class="fa fa-pencil-alt"></i>
+                <% end %>
+                <%= link_to admin_speaker_path(speaker), method: :delete, class: 'btn btn-danger btn-sm' do %>
+                    <i class="fa fa-trash"></i>
+                <% end %>
+            </td>
+        </tr>
+    <% end %>
     </tbody>
 </table>

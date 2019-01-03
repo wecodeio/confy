@@ -32,3 +32,6 @@ yarn-debug.log*
 .yarn-integrity
 
 db-data
+
+# intellij
+.idea/*
