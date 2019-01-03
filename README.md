@@ -7,7 +7,7 @@
 >
 > \# apt install docker-compose
 
-#### Execute
+#### Create
 > $ docker-compose build
 
 > $ docker-compose run web yarn install
@@ -17,3 +17,6 @@
 > $ docker-compose run web rake db:migrate
 >
 > $ docker-compose run web rake db:seed
+
+#### Execute
+> $ docker-compose up
