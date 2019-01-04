@@ -6,7 +6,14 @@ Rails.application.routes.draw do
     get 'login', to: 'sessions#new', as: 'login'
     get 'logout', to: 'sessions#destroy', as: 'logout'
     resources :speakers
-    resources :conferences
+    resources :conferences do
+      resources :talks, only: [:index] do
+        collection do
+          get 'edit', to: 'talks#edit'
+          post 'update', to: 'talks#update'
+        end
+      end
+    end
   end
 
   namespace :api, defaults: {format: :json} do

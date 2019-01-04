@@ -1,0 +1,32 @@
+<legend>
+    Talks for <%= @conference.title %>
+</legend>
+
+<table class="table table-stripped table-hover">
+    <thead>
+    <tr>
+        <th>Thumbnail</th>
+        <th>Title</th>
+        <th>Speaker</th>
+        <th>Link</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @talks.each do |talk| %>
+        <tr>
+            <td>
+                
+            </td>
+            <td>
+                <%= talk.title %>
+            </td>
+            <td>
+                <%= talk.speakers.map(&:name).join(", ") %>
+            </td>
+            <td>
+                <%= link_to talk.video_url %>
+            </td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
