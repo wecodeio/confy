@@ -14,6 +14,8 @@ class Conference < ApplicationRecord
   # validates :place
   validates :url, presence: true, format: { with: /(http:\/\/|https:\/\/|)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?/ix }
 
+  accepts_nested_attributes_for :talks, allow_destroy: true
+
   private
     def assign_slug
       self.slug = "#{start_date.year}-#{title.downcase.gsub(' ', '-')}"

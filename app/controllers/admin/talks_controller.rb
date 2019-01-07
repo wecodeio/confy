@@ -6,11 +6,39 @@ class Admin::TalksController < AdminController
 
   def edit
     @conference = Conference.find(params[:conference_id])
-    @talks = @conference.talks
+    @speakers = Speaker.all.map { |speaker|
+      {
+        id: speaker.id,
+        name: speaker.name
+      }
+    }
+    @talks = @conference.talks.map { |talk|
+      {
+        id: talk.id,
+        title: talk.title,
+        video_url: talk.video_url,
+        speakers: talk.speakers.map { |speaker|
+          {
+            id: speaker.id,
+            name: speaker.name
+          }
+        }
+      }
+    }
   end
 
   def update
-    5/0
+    @conference = Conference.find(params[:conference_id])
+    @conference.update_attributes(conference_params)
+
+    redirect_to edit_admin_conference_talks_path(@conference)
   end
+
+  private
+
+    def conference_params
+      params.require(:conference).permit(
+        talks_attributes: [:id, :title, :video_url, :_destroy, :deleted_at, speaker_ids: []])
+    end
 
 end

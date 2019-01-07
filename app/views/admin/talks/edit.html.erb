@@ -1,32 +1,86 @@
-<legend>
-    Talks for <%= @conference.title %>
-</legend>
+<div id="app">
+    <legend>
+        Talks for
+        <%= @conference.title %>
+    </legend>
 
-<table class="table table-stripped table-hover">
-    <thead>
-    <tr>
-        <th>Thumbnail</th>
-        <th>Title</th>
-        <th>Speaker</th>
-        <th>Link</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @talks.each do |talk| %>
-        <tr>
-            <td>
-                
-            </td>
-            <td>
-                <%= talk.title %>
-            </td>
-            <td>
-                <%= talk.speakers.map(&:name).join(", ") %>
-            </td>
-            <td>
-                <%= link_to talk.video_url %>
-            </td>
-        </tr>
+    <%= form_tag "/admin/conferences/#{@conference.id}/talks/update", html: {class: 'form-horizontal'} do |f| %>
+
+    <table class="table table-stripped table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Speaker(s)</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(talk, tindex) in talks" :key="tindex">
+                <td>
+                    <input type="hidden" :name="'conference[talks_attributes][' + tindex + '][id]'" v-model="talk.id" />
+                    <input type="text" :name="'conference[talks_attributes][' + tindex + '][title]'" class="form-control"
+                        v-model="talk.title" />
+                </td>
+                <td>
+                    <input type="hidden" :name="'conference[talks_attributes][' + tindex + '][speaker_ids][]'"/>
+                    <template v-for="(speaker, sindex) in talk.speakers">
+                        <select v-model="speaker.id" class="form-control" :name="'conference[talks_attributes][' + tindex + '][speaker_ids][]'">
+                            <option v-for="sp in speakers" v-bind:value="sp.id">
+                                {{ sp.name }}
+                            </option>
+                        </select>
+                        <button type="button" @click="removeSpeaker(talk, speaker)">Remove Speaker</button>
+                    </template>
+                    <button @click="addSpeaker(talk)" type="button">Add speaker</button>
+
+                </td>
+                <td>
+                    <input type="text" v-bind:name="'conference[talks_attributes][' + tindex + '][video_url]'" class="form-control"
+                        v-model="talk.video_url" />
+
+                    <a :href="talk.video_url" target="blank">Test</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="form-group">
+        <div class="col-sm-4 col-sm-offset-2">
+            <button class="btn btn-primary" type="submit">Actualizar</button>
+        </div>
+    </div>
+
     <% end %>
-    </tbody>
-</table>
+
+</div>
+
+<%= content_for :javascript do %>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            talks: <%= raw @talks.to_json %>,
+                speakers: <%= raw @speakers.to_json %>
+        },
+    methods: {
+        addSpeaker: function (talk) {
+            talk.speakers.push({
+                id: null,
+                name: null
+            })
+        },
+        removeSpeaker: function (talk, speaker) {
+            var index = talk.speakers.indexOf(speaker);
+            if (index >= 0)
+                talk.speakers.splice(index, 1);
+        }
+    }
+    });
+
+</script>
+
+<% end %>
