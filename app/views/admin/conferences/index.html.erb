@@ -28,10 +28,13 @@
                     <%= conference.slug %>
                 </td>
                 <td>
-                    <%= link_to edit_admin_conference_path(conference), class: 'btn btn-primary btn-sm' do %>
+                    <%= link_to edit_admin_conference_path(conference), class: 'btn btn-primary btn-sm', title: 'Edit conference' do %>
                         <i class="fa fa-pencil-alt"></i>
                     <% end %>
-                    <%= link_to admin_conference_path(conference), method: :delete, class: 'btn btn-danger btn-sm' do %>
+                    <%= link_to edit_admin_conference_talks_path(conference), class: 'btn btn-secondary btn-sm', title: 'Edit talks' do %>
+                    <i class="fa fa-user-edit"></i>
+                    <% end %>
+                    <%= link_to admin_conference_path(conference), method: :delete, class: 'btn btn-danger btn-sm', title: 'Remove conference' do %>
                         <i class="fa fa-trash"></i>
                     <% end %>
                 </td>

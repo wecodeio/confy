@@ -12,33 +12,60 @@
                 <th>Title</th>
                 <th>Speaker(s)</th>
                 <th>Link</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(talk, tindex) in talks" :key="tindex">
-                <td>
-                    <input type="hidden" :name="'conference[talks_attributes][' + tindex + '][id]'" v-model="talk.id" />
-                    <input type="text" :name="'conference[talks_attributes][' + tindex + '][title]'" class="form-control"
-                        v-model="talk.title" />
-                </td>
-                <td>
-                    <input type="hidden" :name="'conference[talks_attributes][' + tindex + '][speaker_ids][]'"/>
-                    <template v-for="(speaker, sindex) in talk.speakers">
-                        <select v-model="speaker.id" class="form-control" :name="'conference[talks_attributes][' + tindex + '][speaker_ids][]'">
-                            <option v-for="sp in speakers" v-bind:value="sp.id">
-                                {{ sp.name }}
-                            </option>
-                        </select>
-                        <button type="button" @click="removeSpeaker(talk, speaker)">Remove Speaker</button>
-                    </template>
-                    <button @click="addSpeaker(talk)" type="button">Add speaker</button>
+                
+                <input type="hidden" :name="'conference[talks_attributes][' + tindex + '][id]'" v-model="talk.id" />
+                <input type="hidden" :name="'conference[talks_attributes][' + tindex + '][_destroy]'" v-model="talk._destroy" />
+                <template v-if="talk._destroy != true">
+                    <td>
+                        <input type="text" :name="'conference[talks_attributes][' + tindex + '][title]'" class="form-control"
+                            v-model="talk.title" />
+                    </td>
+                    <td>
+                        <input type="hidden" :name="'conference[talks_attributes][' + tindex + '][speaker_ids][]'"/>
+                        <template v-for="(speaker, sindex) in talk.speakers">
+                            <select v-model="speaker.id" class="form-control" :name="'conference[talks_attributes][' + tindex + '][speaker_ids][]'">
+                                <option v-for="sp in speakers" v-bind:value="sp.id">
+                                    {{ sp.name }}
+                                </option>
+                            </select>
+                            <button type="button" @click="removeSpeaker(talk, speaker)">Remove Speaker</button>
+                        </template>
+                        <button @click="addSpeaker(talk)" type="button">Add speaker</button>
 
-                </td>
-                <td>
-                    <input type="text" v-bind:name="'conference[talks_attributes][' + tindex + '][video_url]'" class="form-control"
-                        v-model="talk.video_url" />
+                    </td>
+                    <td>
+                        <input type="text" v-bind:name="'conference[talks_attributes][' + tindex + '][video_url]'" class="form-control"
+                            v-model="talk.video_url" />
 
-                    <a :href="talk.video_url" target="blank">Test</a>
+                        <a :href="talk.video_url" target="blank">Test</a>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-danger" @click="removeTalk(talk)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </template>
+                <template v-else>
+                    <td colspan="3">
+                        <strong>{{ talk.title }}</strong> will be removed...
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-success" @click="restoreTalk(talk)">
+                            <i class="fa fa-recycle"></i> Restore
+                        </button>
+                    </td>
+                </template>
+            </tr>
+            <tr>
+                <td colspan="99">
+                    <button type="button" class="btn btn-sm btn-secondary" @click="addTalk()">
+                        <i class="fa fa-plus"></i> Add talk
+                    </button>
                 </td>
             </tr>
         </tbody>
@@ -64,7 +91,7 @@
         el: '#app',
         data: {
             talks: <%= raw @talks.to_json %>,
-                speakers: <%= raw @speakers.to_json %>
+            speakers: <%= raw @speakers.to_json %>
         },
     methods: {
         addSpeaker: function (talk) {
@@ -77,6 +104,21 @@
             var index = talk.speakers.indexOf(speaker);
             if (index >= 0)
                 talk.speakers.splice(index, 1);
+        },
+        addTalk: function() {
+            this.talks.push({
+                id: null,
+                title: null,
+                video_url: null,
+                speakers: [],
+                _destroy: null
+            });
+        },
+        removeTalk: function(talk){
+            talk._destroy = true;
+        },
+        restoreTalk: function(talk) {
+            talk._destroy = null;
         }
     }
     });

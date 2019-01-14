@@ -22,7 +22,8 @@ class Admin::TalksController < AdminController
             id: speaker.id,
             name: speaker.name
           }
-        }
+        },
+        _destroy: nil
       }
     }
   end
@@ -40,5 +41,4 @@ class Admin::TalksController < AdminController
       params.require(:conference).permit(
         talks_attributes: [:id, :title, :video_url, :_destroy, :deleted_at, speaker_ids: []])
     end
-
 end
