@@ -52,7 +52,7 @@
                 </template>
                 <template v-else>
                     <td colspan="3">
-                        <strong>{{ talk.title }}</strong> will be removed...
+                        <strong>"{{ talk.title }}"</strong> will be removed...
                     </td>
                     <td>
                         <button type="button" class="btn btn-sm btn-success" @click="restoreTalk(talk)">
@@ -73,7 +73,7 @@
 
     <div class="form-group">
         <div class="col-sm-4 col-sm-offset-2">
-            <button class="btn btn-primary" type="submit">Actualizar</button>
+            <button class="btn btn-primary" type="submit">Update</button>
         </div>
     </div>
 
