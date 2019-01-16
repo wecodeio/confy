@@ -23,6 +23,7 @@ class Admin::TalksController < AdminController
             name: speaker.name
           }
         },
+        new_speakers: [],
         _destroy: nil
       }
     }
@@ -31,6 +32,16 @@ class Admin::TalksController < AdminController
   def update
     @conference = Conference.find(params[:conference_id])
     @conference.update_attributes(conference_params)
+
+    params[:conference][:talks_attributes].each do |talk_params|
+      if talk_params[1][:new_speakers]
+        talk_params[1][:new_speakers].each do |new_speaker_name|
+          Speaker.create(name: new_speaker_name, slug: ActiveSupport::Inflector.parameterize(new_speaker_name))
+          # TODO: collisions!
+        end
+      end
+    end
+    # automagically associate them to talks?
 
     redirect_to edit_admin_conference_talks_path(@conference)
   end
