@@ -4,6 +4,11 @@
         <%= @conference.title %>
     </legend>
 
+    <textarea class="form-control" v-model="csv"></textarea>
+    <button @click="process()">Process inline CSV</button>
+
+    <hr/>
+
     <%= form_tag "/admin/conferences/#{@conference.id}/talks/update", html: {class: 'form-horizontal'} do |f| %>
 
     <table class="table table-stripped table-hover">
@@ -40,7 +45,8 @@
                         </div>
                         <div>
                             <template v-for="(speaker, sindex) in talk.new_speakers">
-                                <input type="text" class="form-control" v-model="speaker.name" :name="'conference[talks_attributes][' + tindex + '][new_speakers][]'">
+                                <input type="text" class="form-control" v-model="speaker.name" :name="'conference[talks_attributes][' + tindex + '][speakers_attributes][' + sindex + '][name]'">
+                                <input type="text" class="form-control" v-model="speaker.slug" :name="'conference[talks_attributes][' + tindex + '][speakers_attributes][' + sindex + '][slug]'">
                                 <button type="button" @click="removeNewSpeaker(talk, sindex)">Remove NEW Speaker</button>
                             </template>
                             <button @click="addNewSpeaker(talk)" type="button">Add NEW speaker</button>
@@ -96,46 +102,76 @@
 
 <script>
 
-    var app = new Vue({
-        el: '#app',
-        data: {
-            talks: <%= raw @talks.to_json %>,
-            speakers: <%= raw @speakers.to_json %>
-        },
-    methods: {
-        addSpeaker: function (talk) {
-            talk.speakers.push({
-                id: null,
-                name: null
-            })
-        },
-        addNewSpeaker: function (talk) {
-            talk.new_speakers.push({ name: "" });
-        },
-        removeSpeaker: function (talk, speaker) {
-            var index = talk.speakers.indexOf(speaker);
-            if (index >= 0)
-                talk.speakers.splice(index, 1);
-        },
-        removeNewSpeaker: function (talk, index) {
-            talk.new_speakers.splice(index, 1);
-        },
-        addTalk: function() {
-            this.talks.push({
-                id: null,
-                title: null,
-                video_url: null,
-                speakers: [],
-                _destroy: null
-            });
-        },
-        removeTalk: function(talk){
-            talk._destroy = true;
-        },
-        restoreTalk: function(talk) {
-            talk._destroy = null;
+    function slugify(text) {
+            return text.toString().toLowerCase()
+                .replace(/\s+/g, '-')           // Replace spaces with -
+                .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+                .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+                .replace(/^-+/, '')             // Trim - from start of text
+                .replace(/-+$/, '');            // Trim - from end of text
         }
-    }
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                talks: <%= raw @talks.to_json %>,
+                    speakers: <%= raw @speakers.to_json %>,
+                        csv: ''
+        },
+        methods: {
+            process: function() {
+                console.log(this.csv);
+
+                var lines = this.csv.split('\n');
+                for (var i = 0; i < lines.length; i++) {
+                    var fields = lines[i].split('\t');
+                    this.talks.push({
+                        id: null,
+                        title: fields[1],
+                        video_url: fields[0],
+                        speakers: [],
+                        new_speakers: [{
+                            name: [fields[2]],
+                            slug: slugify([fields[2]])
+                        }],
+                        _destroy: null
+                    });
+                }
+            },
+            addSpeaker: function (talk) {
+                talk.speakers.push({
+                    id: null,
+                    name: null
+                })
+            },
+            addNewSpeaker: function (talk) {
+                talk.new_speakers.push({ name: "" });
+            },
+            removeSpeaker: function (talk, speaker) {
+                var index = talk.speakers.indexOf(speaker);
+                if (index >= 0)
+                    talk.speakers.splice(index, 1);
+            },
+            removeNewSpeaker: function (talk, index) {
+                talk.new_speakers.splice(index, 1);
+            },
+            addTalk: function() {
+                this.talks.push({
+                    id: null,
+                    title: null,
+                    video_url: null,
+                    speakers: [],
+                    new_speakers: [],
+                    _destroy: null
+                });
+            },
+            removeTalk: function(talk) {
+                talk._destroy = true;
+            },
+            restoreTalk: function(talk) {
+                talk._destroy = null;
+            }
+        }
     });
 
 </script>

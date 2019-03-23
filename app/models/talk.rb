@@ -2,6 +2,8 @@ class Talk < ApplicationRecord
   has_and_belongs_to_many :speakers, class_name: "Speaker"
   belongs_to :conference, class_name: "Conference", foreign_key: "conference_id"
 
+  accepts_nested_attributes_for :speakers
+
   def video_id
     if video_url.include? "vimeo"
       "//player.vimeo.com/video/#{video_url.split("/").last}"

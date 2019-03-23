@@ -50,6 +50,7 @@ class Admin::TalksController < AdminController
 
     def conference_params
       params.require(:conference).permit(
-        talks_attributes: [:id, :title, :video_url, :_destroy, :deleted_at, speaker_ids: []])
+        talks_attributes: [:id, :title, :video_url, :_destroy, :deleted_at, speaker_ids: [],
+          speakers_attributes: [:id, :name, :slug]])
     end
 end
