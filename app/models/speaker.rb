@@ -5,4 +5,8 @@ class Speaker < ApplicationRecord
   validates :name, presence: true, length: { in: 1..100 }
   validates :slug, presence: true
   validates :avatar, blob: { content_type: ["image/png", "image/jpg", "image/jpeg"], size_range: 0..2.megabytes }
+
+  before_validation(on: :create) do
+    self.slug = self.name.parameterize
+  end
 end

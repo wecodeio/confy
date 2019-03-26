@@ -18,6 +18,9 @@ rubocop:
 routes:
 	docker-compose run web rake routes
 
+console:
+	docker-compose run web rails console
+
 logs:
 	docker-compose logs -tf
 

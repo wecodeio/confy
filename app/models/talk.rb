@@ -4,6 +4,10 @@ class Talk < ApplicationRecord
 
   accepts_nested_attributes_for :speakers
 
+  before_validation(on: :create) do
+    self.slug = self.title.parameterize
+  end
+
   def video_id
     if video_url.include? "vimeo"
       "//player.vimeo.com/video/#{video_url.split("/").last}"
