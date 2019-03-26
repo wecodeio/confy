@@ -13,3 +13,5 @@ development:
 test:
   <<: *default
   database: confy_test
+  adapter: sqlite3
+  database: db/confy.sqlite3
