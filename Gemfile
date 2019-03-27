@@ -6,7 +6,6 @@ ruby "2.5.3"
 gem "rails", "~> 5.2.2"
 
 gem "pg", ">= 0.18", "< 2.0"
-gem "sqlite3", "~> 1.3.6"
 
 gem "puma", "~> 3.11"
 gem "sass-rails", "~> 5.0"
@@ -21,6 +20,7 @@ gem "rollbar"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
+  gem "sqlite3", "~> 1.3.6"
 end
 
 group :development do
