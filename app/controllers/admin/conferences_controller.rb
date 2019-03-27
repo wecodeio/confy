@@ -41,6 +41,6 @@ class Admin::ConferencesController < AdminController
   private
 
     def conference_params
-      params[:conference].permit(:title, :description, :start_date, :end_date, :place, :url, :image)
+      params[:conference].permit(:title, :slug, :description, :start_date, :end_date, :place, :url, :image)
     end
 end
