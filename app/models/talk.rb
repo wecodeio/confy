@@ -19,7 +19,11 @@ class Talk < ApplicationRecord
   def video_thumbnail
     if video_url.include? "vimeo"
       result = Net::HTTP.get(URI.parse("http://vimeo.com/api/v2/video/#{video_url.split("/").last}.json"))
-      JSON.parse(result)[0]["thumbnail_large"]
+      if result.include? 'not found'
+        "//via.placeholder.com/1080x720.png"
+      else
+        JSON.parse(result)[0]["thumbnail_large"]
+      end
     else
       "//img.youtube.com/vi/#{video_url.split("=").last}/maxresdefault.jpg"
     end
