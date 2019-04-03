@@ -30,7 +30,9 @@
           </nav>
           <div class='call-to-action'>
             your conference isn't in the list?
-            <a>Tweet us!</a>
+            <a alt="Tweet us" href="https://twitter.com/intent/tweet?text=%40ConfyTalks+Add+this+great+talk+to+https%3a%2f%2fconfy.wecode.io">
+              Tweet us!
+            </a>
           </div>
         </header>
         <div class='contact'>
