@@ -1,5 +1,5 @@
 # Confy
-Where the meetings are.
+**The conference's library**
 
 ## Pre-Requisites
 - Ruby (version located on [Gemfile](./Gemfile))
