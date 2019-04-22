@@ -28,6 +28,9 @@
                     <%= conference.slug %>
                 </td>
                 <td>
+                    <%= link_to "/#/conferences/#{conference.slug}", class: 'btn btn-primary btn-sm', title: 'Edit conference' do %>
+                        <i class="fa fa-share"></i>
+                    <% end %>
                     <%= link_to edit_admin_conference_path(conference), class: 'btn btn-primary btn-sm', title: 'Edit conference' do %>
                         <i class="fa fa-pencil-alt"></i>
                     <% end %>
