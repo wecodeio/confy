@@ -9,4 +9,9 @@ class Speaker < ApplicationRecord
   before_validation(on: :create) do
     self.slug = self.name.parameterize
   end
+
+  def merge_with(disposable)
+    talks << disposable.talks
+    disposable.delete
+  end
 end

@@ -1,6 +1,41 @@
 class Admin::SpeakersController < AdminController
+  THRESHOLD = 5
+
   def index
     @speakers = Speaker.all
+  end
+
+  def levenshtein
+    items = Speaker.all
+    field = params[:field] || "name"
+
+    by_size = items.group_by { |s| s.name.length }
+    @pairs = []
+    (0..(by_size.keys.size - 1)).each do |k|
+      interesting_values = []
+      ((-[k, THRESHOLD - 1].min)..0).each do |p|
+        interesting_values << by_size[by_size.keys.sort[k + p]]
+      end
+      (0..interesting_values.length - 1).each do |o|
+        (0..(interesting_values[o].length - 1)).each do |i|
+          d = 0
+            ((i+1)..(interesting_values[interesting_values.length - 1].length - 1)).each do |j|
+                p1 = interesting_values[o][i]
+                p2 = interesting_values[interesting_values.length - 1][j]
+                d = Edits::Levenshtein.distance_with_max(p1[field], p2[field], THRESHOLD + 1)
+                @pairs << OpenStruct.new(item1: p1, item2: p2, distance: d) if d < THRESHOLD
+            end
+        end
+      end
+    end
+    @pairs.sort_by!(&:distance)
+  end
+
+  def merge
+    permanent = Speaker.find(params[:id])
+    disposable = Speaker.find(params[:other])
+    permanent.merge_with(disposable)
+    render plain: 'ok'
   end
 
   def new

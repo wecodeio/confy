@@ -5,7 +5,10 @@ Rails.application.routes.draw do
     resources :sessions, only: [:create]
     get 'login', to: 'sessions#new', as: 'login'
     get 'logout', to: 'sessions#destroy', as: 'logout'
-    resources :speakers
+    resources :speakers do
+      get :levenshtein, on: :collection
+      post :merge, on: :member
+    end
     resources :conferences do
       resources :talks, only: [:index] do
         collection do

@@ -1,0 +1,32 @@
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Distance</th>
+            <th>ID1</th>
+            <th>slug1</th>
+            <th>name1</th>
+            <th>ID2</th>
+            <th>slug2</th>
+            <th>name2</th>
+            <th>Merge</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @pairs.each do |pair| %>
+            <tr>
+                <td><%= pair.distance %></td>
+                <td><%= pair.item1.id %></td>
+                <td><%= pair.item1.slug %></td>
+                <td><%= pair.item1.name %></td>
+                <td><%= pair.item2.id %></td>
+                <td><%= pair.item2.slug %></td>
+                <td><%= pair.item2.name %></td>
+                <td>
+                        <%= link_to "Merge 2 into 1", merge_admin_speaker_path(id: pair.item1.id, other: pair.item2.id ), method: :post, class: 'btn btn-sm btn-danger' %>
+                        <br>
+                        <%= link_to "Merge 1 into 2", merge_admin_speaker_path(id: pair.item2.id, other: pair.item1.id ), method: :post, class: 'btn btn-sm btn-danger' %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
