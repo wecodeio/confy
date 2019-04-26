@@ -35,9 +35,6 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
 
   gem "rubocop-rails_config"
-
-  # Levenshtein Distance Analyzer
-  gem 'edits'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -47,3 +44,5 @@ gem "activestorage-validator"
 gem "simple_form"
 gem "aws-sdk"
 gem "bcrypt"
+# Levenshtein Distance Analyzer
+gem 'edits'
