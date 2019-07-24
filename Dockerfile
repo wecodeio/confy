@@ -13,5 +13,6 @@ RUN mkdir /confy
 WORKDIR /confy
 COPY Gemfile /confy/Gemfile
 COPY Gemfile.lock /confy/Gemfile.lock
+
 RUN bundle install
 COPY . /confy

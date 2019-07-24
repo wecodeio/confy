@@ -1,25 +1,26 @@
+console:
+	docker-compose run web rails console
+
+build:
+	docker-compose run web bundle
+	docker-compose build
+
+mine:
+	sudo chown -R $(USER):$(USER) .
+
 start:
 	rm -f tmp/pids/server.pid
 	docker-compose up -d
-
-from_scratch:
-	docker-compose run web rake db:setup db:seed
 
 stop:
 	docker-compose down
 	rm -f tmp/pids/server.pid
 
-rebuild:
-	docker-compose build
-
 rubocop:
-	docker-compose run web rubocop -a
+	docker-compose run web bundle exec rubocop --auto-correct
 
 routes:
 	docker-compose run web rake routes
-
-console:
-	docker-compose run web rails console
 
 logs:
 	docker-compose logs -tf

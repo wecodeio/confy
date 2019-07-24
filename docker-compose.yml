@@ -14,7 +14,7 @@ services:
       - "15432:5432"
   webpacker:
     build: .
-    user: confy
+    #user: confy
     env_file: .env
     command: bash -c "rm -f tmp/cache/webpacker/.last-compilation-digest-development && bundle exec bin/webpack-dev-server"
     volumes:
@@ -24,7 +24,7 @@ services:
   web:
     build: .
     env_file: .env
-    user: confy
+    #user: confy
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
       - .:/confy

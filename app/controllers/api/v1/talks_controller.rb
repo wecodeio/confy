@@ -15,6 +15,7 @@ module Api
             {
               slug: speaker.slug,
               name: speaker.name,
+              avatar_url: speaker.avatar.attachment ? url_for(speaker.avatar.attachment) : "http://confy-assets.wecode.io/speakers/generic-speaker.png",
             }
           end,
           conference: {

@@ -20,19 +20,21 @@
           ></iframe>
         </div>
         <header class="speaker-mini">
-          <ul>
-            <li style="display: block;" v-for="speaker in talk.speakers" :key="speaker.slug">
-              <div class="avathar small">
-                <router-link :to="{ name: 'Speaker', params: { slug: speaker.slug } }">
-                  <img
-                    :alt="speaker.name"
-                    src="http://confy-assets.wecode.io/speakers/generic-speaker.png"
-                    :title="speaker.name"
-                  >
-                </router-link>
-              </div>
-            </li>
-          </ul>
+          <div class="carousel">
+            <ul>
+              <li style="display: block;" v-for="speaker in talk.speakers" :key="speaker.slug">
+                <div class="avathar small">
+                  <router-link :to="{ name: 'Speaker', params: { slug: speaker.slug } }">
+                    <img
+                      :alt="speaker.name"
+                      :src="speaker.avatar_url"
+                      :title="speaker.name"
+                    >
+                  </router-link>
+                </div>
+              </li>
+            </ul>
+          </div>
           <div class="info">
             <p class="name" v-for="speaker in talk.speakers" :key="speaker.slug">
               <router-link
@@ -61,10 +63,22 @@ export default {
     var slug = this.$route.params.slug;
     axios.get("/api/v1/talks/" + slug).then(response => {
       this.talk = response.data;
+
+
+      setTimeout(function(){
+        new Carousel({
+          carousel: '.carousel',
+          delay: 2.5,
+          autoplay: true
+        })
+      }, 500);
+
+
     });
   }
 };
 </script>
 
 <style>
+
 </style>

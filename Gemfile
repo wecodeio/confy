@@ -24,25 +24,39 @@ group :development, :test do
 end
 
 group :development do
-  gem "bullet"
-  gem "rack-mini-profiler"
-  gem "web-console", ">= 3.3.0"
+  # Performance
+  gem 'bullet', '~> 5.9'
+  gem 'rack-mini-profiler', '~> 1.0'
 
-  gem "listen", "~> 3.1.5"
-  gem "better_errors"
-  gem "binding_of_caller"
-  gem "spring"
-  gem "spring-watcher-listen", "~> 2.0.0"
+  # Errors
+  gem 'better_errors', '~> 2.5'
+  gem 'web-console', '~> 3.7'
 
-  gem "rubocop-rails_config"
+  gem 'binding_of_caller', '~> 0.8'
+  gem 'listen', '~> 3.1'
+  gem 'spring', '~> 2.0'
+  gem 'spring-watcher-listen', '~> 2.0'
+
+  # Linters
+  gem 'annotate', '~> 2.7'
+  gem 'ordinare', '~> 0.4'
+  gem 'rubocop-rails_config', '~> 0.5'
+
+  # Gemfile health
+  gem 'pessimize', '~> 0.4'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "responders"
 gem "activestorage-validator"
+
+# Utils
+gem 'discard', '~> 1.1'
+gem 'pagy', '~> 3.3'
 gem "simple_form"
 gem "aws-sdk"
 gem "bcrypt"
+
 # Levenshtein Distance Analyzer
 gem 'edits'

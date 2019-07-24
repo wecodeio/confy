@@ -56,19 +56,21 @@
           </div>
           <aside class="meta">
             <header class="speaker-mini" id="carousel-1">
-              <ul>
-                <li style="display: block;" v-for="speaker in talk.speakers" :key="speaker.slug">
-                  <div class="avathar small">
-                    <router-link :to="{ name: 'Speaker', params: { slug: speaker.slug } }">
-                      <img
-                        :alt="speaker.name"
-                        :src="speaker.avatar_url"
-                        :title="speaker.name"
-                      >
-                    </router-link>
-                  </div>
-                </li>
-              </ul>
+              <div class="carousel">
+                <ul>
+                  <li style="display: block;" v-for="speaker in talk.speakers" :key="speaker.slug">
+                    <div class="avathar small">
+                      <router-link :to="{ name: 'Speaker', params: { slug: speaker.slug } }">
+                        <img
+                          :alt="speaker.name"
+                          :src="speaker.avatar_url"
+                          :title="speaker.name"
+                        >
+                      </router-link>
+                    </div>
+                  </li>
+                </ul>
+              </div>
               <div class="info">
                 <p class="name" v-for="speaker in talk.speakers" :key="speaker.slug">
                   <router-link
@@ -101,6 +103,15 @@ export default {
     var slug = this.$route.params.slug;
     axios.get("/api/v1/conferences/" + slug).then(response => {
       this.conference = response.data;
+      setTimeout(function(){
+        document.querySelectorAll(".carousel").forEach(element => {
+          new Carousel({
+            element: element,
+            delay: 2.5,
+            autoplay: true
+          })
+        });
+      }, 500);
     });
   }
 };
