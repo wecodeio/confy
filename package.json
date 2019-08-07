@@ -8,7 +8,7 @@
     "vue-analytics": "^5.16.4",
     "vue-headful": "^2.0.1",
     "vue-loader": "14.2.2",
-    "vue-router": "^3.0.2",
+    "vue-router": "^3.1.1",
     "vue-template-compiler": "^2.6.10",
     "vue2-filters": "^0.4.1"
   },
