@@ -53,7 +53,7 @@ gem "activestorage-validator"
 
 # Utils
 gem 'discard', '~> 1.1'
-gem 'pagy', '~> 3.3'
+gem 'pagy', '~> 3.5'
 gem "simple_form"
 gem "aws-sdk"
 gem "bcrypt"
