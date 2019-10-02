@@ -5,7 +5,7 @@ module Api
       respond_to :json
 
       def show
-        talk = Talk.find_by(slug: params[:slug])
+        talk = Talk.joins(:conference).where(conferences: {slug: params[:conference_slug]}).find_by(slug: params[:slug])
         x = {
           title: talk.title,
           slug: talk.slug,

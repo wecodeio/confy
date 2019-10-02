@@ -42,7 +42,7 @@ export default new Router({
       component: Speaker
     },
     {
-      path: '/talks/:slug',
+      path: '/conferences/:conference_slug/talks/:talk_slug',
       name: 'Talk',
       component: Talk
     }

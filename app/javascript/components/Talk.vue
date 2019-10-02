@@ -60,10 +60,11 @@ export default {
     };
   },
   created() {
-    var slug = this.$route.params.slug;
-    axios.get("/api/v1/talks/" + slug).then(response => {
-      this.talk = response.data;
+    var conference_slug = this.$route.params.conference_slug;
+    var talk_slug = this.$route.params.talk_slug;
 
+    axios.get("/api/v1/conferences/" + conference_slug + "/talks/" + talk_slug).then(response => {
+      this.talk = response.data;
 
       setTimeout(function(){
         new Carousel({

@@ -21,8 +21,9 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
-      resources :conferences, only: [:index, :show], param: :slug
-      resources :talks, only: [:show], param: :slug
+      resources :conferences, only: [:index, :show], param: :slug do
+        resources :talks, only: [:show], param: :slug
+      end
       resources :speakers, only: [:index, :show], param: :slug
     end
   end

@@ -50,7 +50,7 @@
       <section class="talks-grid">
         <article class="talk" v-for="talk in conference.talks" :key="talk.id">
           <div class="video">
-            <router-link :to="{ name: 'Talk', params: { slug: talk.slug } }">
+            <router-link :to="{ name: 'Talk', params: { conference_slug: conference.slug, talk_slug: talk.slug } }">
               <img :alt="talk.title" :src="talk.video_thumbnail" :title="talk.title">
             </router-link>
           </div>
@@ -78,7 +78,7 @@
                   >{{ speaker.name }}</router-link>
                 </p>
                 <h1 class="title">
-                  <router-link :to="{ name: 'Talk', params: { slug: talk.slug } }">{{ talk.title }}</router-link>
+                  <router-link :to="{ name: 'Talk', params: { conference_slug: conference.slug, talk_slug: talk.slug } }">{{ talk.title }}</router-link>
                 </h1>
               </div>
             </header>
