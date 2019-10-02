@@ -798,7 +798,7 @@ GEM
       bundler
       trollop
     pg (1.1.4)
-    puma (3.12.0)
+    puma (3.12.1)
     rack (2.0.7)
     rack-mini-profiler (1.0.2)
       rack (>= 1.2.0)
