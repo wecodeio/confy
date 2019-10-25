@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get 'logout', to: 'sessions#destroy', as: 'logout'
     resources :speakers do
       get :levenshtein, on: :collection
+      get :levenshtein_auto, on: :collection
       post :merge, on: :member
     end
     resources :conferences do
