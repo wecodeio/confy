@@ -57,7 +57,7 @@ class Admin::SpeakersController < AdminController
         end
     end
 
-    pairs[0..10].each do |pair|
+    pairs.each do |pair|
       permanent = pair.item1
       disposable = pair.item2
       permanent.merge_with(disposable)
