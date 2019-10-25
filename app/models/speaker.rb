@@ -14,4 +14,9 @@ class Speaker < ApplicationRecord
     talks << disposable.talks
     disposable.delete
   end
+
+  def levenshtein_name
+    name.gsub(/(\W|\d)/, "").split.sort.join(" ").downcase
+  end
+
 end

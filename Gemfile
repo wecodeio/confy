@@ -60,3 +60,4 @@ gem "bcrypt"
 
 # Levenshtein Distance Analyzer
 gem 'edits'
+gem "table_print"

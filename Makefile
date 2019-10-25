@@ -45,22 +45,13 @@ production_deploy:
 	heroku restart --app confy-wecodeio
 	heroku maintenance:off --app confy-wecodeio
 
-capture_production_db:
+use_production_db:
 	heroku pg:backups capture --app confy-wecodeio
-	$(MAKE) download_production_db
-
-download_production_db:
 	curl -o tmp/latest.dump `heroku pg:backups public-url --app confy-wecodeio`
-
-restore_production_db:
 	docker-compose run web bundle exec rake db:drop db:create DISABLE_DATABASE_ENVIRONMENT_CHECK=1
 	docker cp tmp/latest.dump confy_db_1:/latest.dump
 	! docker exec confy_db_1 pg_restore --verbose --clean --no-acl --no-owner -h localhost -d confy_development -U confy /latest.dump
 	docker-compose run web bundle exec rake db:migrate
-
-get_current_production_db:
-	$(MAKE) capture_production_db
-	$(MAKE) restore_production_db
 
 analyze_levenshtein:
 	docker-compose run web rails runner utilities/data_analysis/distance.rb
