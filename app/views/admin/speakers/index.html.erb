@@ -2,7 +2,8 @@
     Speakers
 </legend>
 
-<%= link_to "New speaker", new_admin_speaker_path %>
+<%= link_to "New speaker", new_admin_speaker_path, class: 'btn btn-sm btn-primary' %>
+<%= link_to "Levenshtein distances", levenshtein_admin_speakers_path, class: 'btn btn-sm btn-secondary' %>
 
 <table class="table table-stripped table-hover">
     <thead>
