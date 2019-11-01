@@ -28,9 +28,9 @@ module Api
               description: talk.title,
               video_thumbnail: talk.video_thumbnail,
               conference: {
-                title: talk.conference.title,
-                slug: talk.conference.slug,
-                image_url: talk.conference.image.attachment ? url_for(talk.conference.image.attachment) : "images/conference.png"
+                title: talk.conference.try(:title),
+                slug: talk.conference.try(:slug),
+                image_url: talk.conference && talk.conference.image.attachment ? url_for(talk.conference.image.attachment) : "images/conference.png"
               },
             }
           end,

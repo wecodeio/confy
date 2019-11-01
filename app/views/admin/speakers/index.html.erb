@@ -5,12 +5,13 @@
 <%= link_to "New speaker", new_admin_speaker_path, class: 'btn btn-sm btn-primary' %>
 <%= link_to "Levenshtein distances", levenshtein_admin_speakers_path, class: 'btn btn-sm btn-secondary' %>
 
-<table class="table table-stripped table-hover">
+<table class="table table-stripped table-hover speakers">
     <thead>
     <tr>
         <th>Avatar</th>
         <th>Full name</th>
         <th>Slug</th>
+        <th>Talks</th>
         <th>&nbsp;</th>
     </tr>
     </thead>
@@ -31,6 +32,9 @@
                 <%= speaker.slug %>
             </td>
             <td>
+                <%= speaker.talks.count %>
+            </td>
+            <td>
                 <%= link_to edit_admin_speaker_path(speaker), class: 'btn btn-primary btn-sm' do %>
                     <i class="fa fa-pencil-alt"></i>
                 <% end %>
@@ -42,3 +46,35 @@
     <% end %>
     </tbody>
 </table>
+
+<%= content_for :head do %>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+
+  <style>
+    form.button_to {
+      display: inline-block;
+      margin: 0 0.1em;
+    }
+  </style>
+
+<% end %>
+
+<%= content_for :javascript do %>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="application/javascript"></script>
+
+  <script type="application/javascript">
+      $(function () {
+          $('.speakers').DataTable({
+              order: [[0, "asc"]],
+              paging: false,
+              language: {
+                  url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+              },
+              columnDefs: [{
+                  targets: 'no-sort',
+                  orderable: false
+              }]
+          });
+      });
+  </script>
+<% end %>
