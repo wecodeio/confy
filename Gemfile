@@ -29,7 +29,7 @@ group :development do
   gem 'rack-mini-profiler', '~> 1.0'
 
   # Errors
-  gem 'better_errors', '~> 2.5'
+  gem 'better_errors', '~> 2.6'
   gem 'web-console', '~> 3.7'
 
   gem 'binding_of_caller', '~> 0.8'
