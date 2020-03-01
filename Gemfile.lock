@@ -798,7 +798,7 @@ GEM
       bundler
       trollop
     pg (1.1.4)
-    puma (3.12.0)
+    puma (3.12.4)
     rack (2.0.7)
     rack-mini-profiler (1.0.2)
       rack (>= 1.2.0)
@@ -934,7 +934,7 @@ DEPENDENCIES
   pagy (~> 3.5)
   pessimize (~> 0.4)
   pg (>= 0.18, < 2.0)
-  puma (~> 3.11)
+  puma (~> 3.12)
   rack-mini-profiler (~> 1.0)
   rails (~> 5.2.2)
   responders
