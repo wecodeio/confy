@@ -26,7 +26,7 @@ end
 group :development do
   # Performance
   gem 'bullet', '~> 5.9'
-  gem 'rack-mini-profiler', '~> 1.0'
+  gem 'rack-mini-profiler', '~> 2.1'
 
   # Errors
   gem 'better_errors', '~> 2.5'
