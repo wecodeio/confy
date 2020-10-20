@@ -755,7 +755,7 @@ GEM
     debug_inspector (0.0.3)
     discard (1.1.0)
       activerecord (>= 4.2, < 7)
-    edits (0.2.1)
+    edits (0.4.0)
     erubi (1.9.0)
     execjs (2.7.0)
     ffi (1.9.25)
