@@ -780,7 +780,9 @@ GEM
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (0.9.2)
-    mimemagic (0.3.3)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.12.2)
@@ -798,7 +800,8 @@ GEM
       bundler
       trollop
     pg (1.1.4)
-    puma (3.12.0)
+    puma (4.3.8)
+      nio4r (~> 2.0)
     rack (2.0.7)
     rack-mini-profiler (1.0.2)
       rack (>= 1.2.0)
@@ -934,7 +937,7 @@ DEPENDENCIES
   pagy (~> 3.5)
   pessimize (~> 0.4)
   pg (>= 0.18, < 2.0)
-  puma (~> 3.11)
+  puma (~> 4.3)
   rack-mini-profiler (~> 1.0)
   rails (~> 5.2.2)
   responders
